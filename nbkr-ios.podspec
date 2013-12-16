@@ -6,22 +6,21 @@
 #
 Pod::Spec.new do |s|
   s.name         = "nbkr-ios"
-  s.version      = "0.1.0"
-  s.summary      = "A short description of nbkr-ios."
+  s.version      = "0.0.1"
+  s.summary      = "API consumer for currency rates of National Bank of Kyrgyz Republic."
   s.description  = <<-DESC
-                    An optional longer description of nbkr-ios
-
-                    * Markdown format.
-                    * Don't worry about the indent, we strip it!
+                   API consumer for currency rates of National Bank of Kyrgyz Republic.
+                   * http://www.nbkr.kg/XML/daily.xml
+                   * http://www.nbkr.kg/XML/weekly.xml
                    DESC
-  s.homepage     = "http://EXAMPLE/NAME"
+  s.homepage     = "http://github.com/kalys/nbkr-ios"
   s.screenshots  = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license      = 'MIT'
   s.author       = { "Kalys Osmonov" => "kalys@osmonov.com" }
-  s.source       = { :git => "http://EXAMPLE/NAME.git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/kalys/nbkr-ios.git", :tag => s.version.to_s }
 
-  # s.platform     = :ios, '5.0'
-  # s.ios.deployment_target = '5.0'
+  s.platform     = :ios, '5.0'
+  s.ios.deployment_target = '5.0'
   # s.osx.deployment_target = '10.7'
   s.requires_arc = true
 

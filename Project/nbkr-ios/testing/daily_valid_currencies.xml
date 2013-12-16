@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<CurrencyRates Name="Daily Exchange Rates" Date="15.12.2013">
+<Currency ISOCode="USD">
+<Nominal>1</Nominal>
+<Value>29,2717</Value>
+</Currency>
+<Currency ISOCode="EUR">
+<Nominal>1</Nominal>
+<Value>67,8003</Value>
+</Currency>
+<Currency ISOCode="KZT">
+<Nominal>1</Nominal>
+<Value>0,3197</Value>
+</Currency>
+<Currency ISOCode="RUB">
+<Nominal>1</Nominal>
+<Value>1,4992</Value>
+</Currency>
+</CurrencyRates>

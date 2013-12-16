@@ -1,7 +1,14 @@
-pod "nbkr-ios", :path => "../"
+platform :ios, '6.0'
 
-target "Demo" do
+
+target :'nbkr-ios' do
+  pod "nbkr-ios", :path => "../"
 end
 
-target "DemoTests" do
+target :'nbkr-iosTests' do
+  pod 'Specta'
+  pod 'Expecta'
+  pod 'Nocilla'
 end
+
+# link_with ['nbkr-ios', 'nbkr-iosTests']

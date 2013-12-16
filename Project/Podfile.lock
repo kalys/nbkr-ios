@@ -1,0 +1,23 @@
+PODS:
+  - Expecta (0.2.3)
+  - nbkr-ios (0.0.1)
+  - Nocilla (0.7.1)
+  - Specta (0.2.1)
+
+DEPENDENCIES:
+  - Expecta
+  - nbkr-ios (from `../`)
+  - Nocilla
+  - Specta
+
+EXTERNAL SOURCES:
+  nbkr-ios:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Expecta: dbc4a27fabb853bdd2e907e33f11ee43a9a47d0c
+  nbkr-ios: b792d9d51de385556128e1bd883781bd0677b86e
+  Nocilla: 79bf72b15b7e6589d3d37ffa7540d7271fb75121
+  Specta: 2d06220591110c6d9757d8be8ecf8e63aa40dc2a
+
+COCOAPODS: 0.28.0
