@@ -1,0 +1,7 @@
+pod "nbkr-ios", :path => "../"
+
+target "Demo" do
+end
+
+target "DemoTests" do
+end
