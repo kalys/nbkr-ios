@@ -7,6 +7,21 @@
 
 To run the example project; clone the repo, and run `pod install` from the Project directory first.
 
+### Daily currency rates for USD, RUR, KZT, EUR
+```
+[[NBKR sharedInstance] dailyCurrencyRates:^(NSDictionary *rates)
+	{
+		NSLog(@"%@", [rates objectForKey:@"USD"]);
+		NSLog(@"%@", [rates objectForKey:@"RUR"]);
+		NSLog(@"%@", [rates objectForKey:@"KZT"]);
+		NSLog(@"%@", [rates objectForKey:@"EUR"]);
+	}
+	error:^(NSError *error) {
+		NSLog(@"%@", error);
+	}
+];
+```
+
 ## Requirements
 
 ## Installation

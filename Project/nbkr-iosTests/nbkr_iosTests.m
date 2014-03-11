@@ -27,6 +27,30 @@ afterEach(^{
     [[LSNocilla sharedInstance] clearStubs];
 });
 
+
+describe(@"dailyCurrencyRates:error", ^{
+    context(@"when response is OK", ^{
+        beforeEach(^{
+            NSString *dailyFixturesPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"daily_valid_currencies" ofType:@"xml"];
+            stubRequest(@"GET", @"http://www.nbkr.kg/XML/daily.xml").
+            andReturn(200).
+            withBody([NSData dataWithContentsOfFile:dailyFixturesPath]);
+        });
+        
+        it(@"should call successful block with data dictionary", ^AsyncBlock {
+            [[[NBKR alloc] init] dailyCurrencyRates:^(NSDictionary *rates) {
+                expect(rates).notTo.beEmpty();
+                expect([rates allKeys]).to.beSupersetOf(@[@"USD", @"KZT", @"RUB", @"EUR"]);
+                done();
+            }
+                                              error:^(NSError *error) {
+                                                  NSLog(@"%@", error);
+                                              }
+             ];
+        });
+    });
+});
+
 describe(@"currencyRates:error", ^{
     context(@"when online", ^{
         
@@ -59,6 +83,7 @@ describe(@"currencyRates:error", ^{
             error:nil];
         });
     });
+    
     /*
      
     TODO: v1.1

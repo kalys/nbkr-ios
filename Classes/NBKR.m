@@ -42,6 +42,24 @@ static dispatch_once_t once_token = 0;
     once_token = 0;
 }
 
+- (void) dailyCurrencyRates:(void (^)(NSDictionary *))completeBlock error:(void (^)(NSError *))errorBlock {
+    self.result = [NSMutableDictionary new];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://www.nbkr.kg/XML/daily.xml"]];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                               if (connectionError) {
+                                   errorBlock(connectionError);
+                               }
+                               
+                               NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
+                               [xmlParser setDelegate:self];
+                               [xmlParser parse];
+                               completeBlock(self.result);
+                           }
+    ];
+}
+
 - (void) currencyRates:(void (^)(NSDictionary *))completeBlock error:(void (^)(NSError *))errorBlock {
     NSOperationQueue *opQueue = [[NSOperationQueue alloc] init];
     

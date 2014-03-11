@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F1638E3B-20EB-4F9E-971C-1327A2C7071A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>nbkr-ios</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>14378257-C4B3-45FF-883B-7A98B52FEC5C</key>
+		<string>ssh://github.com/kalys/nbkr-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Project/nbkr-ios.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>14378257-C4B3-45FF-883B-7A98B52FEC5C</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/kalys/nbkr-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>14378257-C4B3-45FF-883B-7A98B52FEC5C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>14378257-C4B3-45FF-883B-7A98B52FEC5C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>nbkr-ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>
