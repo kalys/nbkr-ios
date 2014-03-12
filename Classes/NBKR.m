@@ -76,39 +76,6 @@
     ];
 }
 
-- (void) currencyRates:(void (^)(NSDictionary *))completeBlock error:(void (^)(NSError *))errorBlock {
-    NSOperationQueue *opQueue = [[NSOperationQueue alloc] init];
-    
-    // TODO: validate currency codes
-    
-    self.result = [NSMutableDictionary new];
-    __weak NBKR *weakSelf = self;
-    
-    // let's do sync (yes, sync) requests in new thread. that'll be ok i guess.
-    [opQueue addOperationWithBlock:^{
-        // synchronously fetch daily currency rates
-        NSXMLParser *xmlParser = nil;
-        NSData *data = [self getContentsOfUrlString:@"http://www.nbkr.kg/XML/daily.xml"];
-        if (data) {
-            xmlParser = [[NSXMLParser alloc] initWithData:data];
-            [xmlParser setDelegate:weakSelf];
-            [xmlParser parse];
-        }
-        
-        data = [self getContentsOfUrlString:@"http://www.nbkr.kg/XML/weekly.xml"];
-        if (data) {
-            xmlParser = [[NSXMLParser alloc] initWithData:data];
-            [xmlParser setDelegate:weakSelf];
-            [xmlParser parse];
-        }
-        
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            completeBlock(weakSelf.result);
-        }];
-
-    }];
-}
-
 #pragma mark NSXMLParserDelegate methods
 
 - (void) parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
