@@ -9,7 +9,7 @@ To run the example project; clone the repo, and run `pod install` from the Proje
 
 ### Daily currency rates for USD, RUR, KZT, EUR
 ```
-[[NBKR sharedInstance] dailyCurrencyRates:^(NSArray *rates)
+[[NBKR new] dailyCurrencyRates:^(NSArray *rates)
 	{
 		NSLog(@"%@", [rates objectAtIndex:0]);
 		NSLog(@"%@", [rates objectAtIndex:1]);

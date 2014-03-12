@@ -48,14 +48,21 @@ static dispatch_once_t once_token = 0;
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                               NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
                                if (connectionError) {
                                    errorBlock(connectionError);
+                                   return;
                                }
                                
-                               NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
-                               [xmlParser setDelegate:self];
-                               [xmlParser parse];
-                               completeBlock(self.result);
+                               if ([httpResponse statusCode] == 200) {
+                               
+                                   NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
+                                   [xmlParser setDelegate:self];
+                                   [xmlParser parse];
+                                   completeBlock(self.result);
+                               } else {
+                                   errorBlock([NSError errorWithDomain:@"NBKR daily rates. Invalid status code." code:-1 userInfo:nil]);
+                               }
                            }
     ];
 }

@@ -27,25 +27,47 @@ afterEach(^{
     [[LSNocilla sharedInstance] clearStubs];
 });
 
-
 describe(@"dailyCurrencyRates:error", ^{
     context(@"when response is OK", ^{
-        beforeEach(^{
+        it(@"should call successful block with data dictionary", ^AsyncBlock {
             NSString *dailyFixturesPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"daily_valid_currencies" ofType:@"xml"];
             stubRequest(@"GET", @"http://www.nbkr.kg/XML/daily.xml").
-            andReturn(200).
-            withBody([NSData dataWithContentsOfFile:dailyFixturesPath]);
+                andReturn(200).
+                withBody([NSData dataWithContentsOfFile:dailyFixturesPath]);
+            
+            [[NBKR new] dailyCurrencyRates:^(NSArray *rates) {
+                                            expect(rates).notTo.beEmpty();
+                                            expect([[rates objectAtIndex:0] objectForKey:@"currency"]).to.equal(@"USD");
+                                            done();
+                                        }
+                                     error: nil
+            ];
         });
-        
-        it(@"should call successful block with data dictionary", ^AsyncBlock {
-            [[[NBKR alloc] init] dailyCurrencyRates:^(NSArray *rates) {
-                expect(rates).notTo.beEmpty();
-                expect([[rates objectAtIndex:0] objectForKey:@"currency"]).to.equal(@"USD");
-                done();
-            }
-                                              error:^(NSError *error) {
-                                                  NSLog(@"%@", error);
-                                              }
+    });
+    
+    context(@"when request is not OK", ^{
+        it(@"should call error block with error object", ^AsyncBlock {
+            stubRequest(@"GET", @"http://www.nbkr.kg/XML/daily.xml").
+                andReturn(404);
+            
+            [[NBKR new] dailyCurrencyRates:nil
+                                     error:^(NSError *error) {
+                                         NSLog(@"%@", error);
+                                         done();
+                                     }
+             ];
+        });
+    });
+    
+    context(@"when totally unknown error is occured", ^{
+        it(@"should call error block with error object", ^AsyncBlock {
+            stubRequest(@"GET", @"http://www.nbkr.kg/XML/daily.xml").
+                andFailWithError([NSError errorWithDomain:@"foo" code:123 userInfo:nil]);
+            [[NBKR new] dailyCurrencyRates:nil
+                                     error:^(NSError *error) {
+                                         NSLog(@"%@", error);
+                                         done();
+                                     }
              ];
         });
     });
