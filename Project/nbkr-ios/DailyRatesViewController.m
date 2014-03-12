@@ -6,16 +6,16 @@
 //  Copyright (c) 2013 Kalys Osmonov. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "DailyRatesViewController.h"
 #import "NBKR.h"
 
-@interface ViewController ()
+@interface DailyRatesViewController ()
 
-@property (nonatomic, retain) NSDictionary *result;
+@property (nonatomic, retain) NSArray *result;
 
 @end
 
-@implementation ViewController
+@implementation DailyRatesViewController
 
 @synthesize result;
 
@@ -23,13 +23,12 @@
 {
     [super viewDidLoad];
     
-    UITableView *tv = [[UITableView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:tv];
-    [tv setDataSource:self];
+
+    [self.tableView setDataSource:self];
     
-    [[NBKR sharedInstance] currencyRates:^(NSDictionary* response) {
+    [[NBKR sharedInstance] dailyCurrencyRates:^(NSArray* response) {
         self.result = response;
-        [tv reloadData];
+        [self.tableView reloadData];
         }
                                    error:nil];
     
@@ -50,9 +49,8 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"aoeuaeou"];
-    NSString *key = [[self.result allKeys] objectAtIndex:indexPath.row];
-    NSDictionary *currencyRate = [self.result objectForKey:key];
-    cell.textLabel.text = key;
+    NSDictionary *currencyRate = [self.result objectAtIndex:indexPath.row];
+    cell.textLabel.text = [currencyRate objectForKey:@"currency"];
     cell.detailTextLabel.text = [currencyRate objectForKey:@"rate"];
     return cell;
 }
