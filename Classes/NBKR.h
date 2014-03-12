@@ -8,11 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NBKR : NSObject<NSXMLParserDelegate>
+@interface NBKR : NSObject
 
 - (void) dailyCurrencyRates:(void (^)(NSArray *)) response error:(void(^)(NSError *)) error;
 - (void) weeklyCurrencyRates:(void (^)(NSArray *)) response error:(void(^)(NSError *)) error;
-
-@property (nonatomic, strong) NSMutableArray *result;
 
 @end

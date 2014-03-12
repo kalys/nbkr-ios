@@ -7,24 +7,9 @@
 //
 
 #import "NBKR.h"
-
-@interface NBKR ()
-
-@property (atomic, retain) NSString *dateString;
-@property (atomic, retain) NSString *currencyCode;
-@property (atomic, assign) BOOL rateNode;
-@property (atomic, retain) NSString *currencyRate;
-
-
-
-@end
+#import "NBKRXMLParser.h"
 
 @implementation NBKR
-
-@synthesize result = _result;
-@synthesize dateString = _dateString;
-@synthesize currencyCode = _currencyCode;
-@synthesize rateNode = _rateNode;
 
 - (void) weeklyCurrencyRates:(void (^)(NSArray *))completeBlock error:(void (^)(NSError *))errorBlock {
     [self requestCurrencyRates:@"weekly" complete:completeBlock error:errorBlock];
@@ -35,7 +20,7 @@
 }
 
 - (void) requestCurrencyRates:(NSString *)type complete:(void (^)(NSArray *))completeBlock error:(void (^)(NSError *))errorBlock {
-    self.result = [NSMutableArray new];
+
     NSString *urlString = [NSString stringWithFormat:@"http://www.nbkr.kg/XML/%@.xml", type, nil];
     NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
     [NSURLConnection sendAsynchronousRequest:request
@@ -48,47 +33,14 @@
                                }
                                
                                if ([httpResponse statusCode] == 200) {
+                                   completeBlock([[[NBKRXMLParser alloc] initWithData:data] parse]);
                                    
-                                   NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
-                                   [xmlParser setDelegate:self];
-                                   [xmlParser parse];
-                                   completeBlock(self.result);
                                } else {
                                    NSString *errorMessage = [NSString stringWithFormat:@"NBKR %@ rates. Invalid status code.", type, nil];
                                    errorBlock([NSError errorWithDomain:errorMessage code:-1 userInfo:nil]);
                                }
                            }
      ];
-}
-
-#pragma mark NSXMLParserDelegate methods
-
-- (void) parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
-    if ([elementName isEqualToString:@"CurrencyRates"]) {
-        self.dateString = [attributeDict objectForKey:@"Date"];
-    } else if ([elementName isEqualToString:@"Currency"]) {
-        self.currencyCode = [attributeDict objectForKey:@"ISOCode"];
-    } else if ([elementName isEqualToString:@"Value"]) {
-        self.rateNode = YES;
-    }
-}
-
-- (void) parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-    if (self.rateNode) {
-        self.currencyRate = string;
-    }
-}
-
-- (void) parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-    if ([elementName isEqualToString:@"Value"]) {
-        self.rateNode = NO;
-    } else if ([elementName isEqualToString:@"Currency"]) {
-        //[self.result setObject:@{@"rate": self.currencyRate, @"date": self.dateString} forKey:self.currencyCode];
-        [self.result addObject:@{@"currency": self.currencyCode, @"rate": self.currencyRate, @"date": self.dateString}];
-        
-        self.currencyRate = nil;
-        self.currencyCode = nil;
-    }
 }
 
 #pragma mark Helper methods
