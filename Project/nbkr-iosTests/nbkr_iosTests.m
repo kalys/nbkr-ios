@@ -73,10 +73,57 @@ describe(@"dailyCurrencyRates:error", ^{
     });
 });
 
+describe(@"weeklyCurrencyRates:error", ^{
+    context(@"when response is OK", ^{
+        it(@"should call successful block with data dictionary", ^AsyncBlock {
+            NSString *weeklyFixturesPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"weekly_valid_currencies" ofType:@"xml"];
+            stubRequest(@"GET", @"http://www.nbkr.kg/XML/weekly.xml").
+            andReturn(200).
+            withBody([NSData dataWithContentsOfFile:weeklyFixturesPath]);
+            
+            [[NBKR new] weeklyCurrencyRates:^(NSArray *rates) {
+                expect(rates).notTo.beEmpty();
+                expect([[rates objectAtIndex:0] objectForKey:@"currency"]).to.equal(@"GBP");
+                done();
+            }
+                                     error: nil
+             ];
+        });
+    });
+    
+    context(@"when request is not OK", ^{
+        it(@"should call error block with error object", ^AsyncBlock {
+            stubRequest(@"GET", @"http://www.nbkr.kg/XML/weekly.xml").
+            andReturn(404);
+            
+            [[NBKR new] weeklyCurrencyRates:nil
+                                     error:^(NSError *error) {
+                                         NSLog(@"%@", error);
+                                         done();
+                                     }
+             ];
+        });
+    });
+    
+    context(@"when totally unknown error is occured", ^{
+        it(@"should call error block with error object", ^AsyncBlock {
+            stubRequest(@"GET", @"http://www.nbkr.kg/XML/weekly.xml").
+            andFailWithError([NSError errorWithDomain:@"foo" code:123 userInfo:nil]);
+            [[NBKR new] weeklyCurrencyRates:nil
+                                     error:^(NSError *error) {
+                                         NSLog(@"%@", error);
+                                         done();
+                                     }
+             ];
+        });
+    });
+
+});
+
 /*
 describe(@"currencyRates:error", ^{
     context(@"when online", ^{
-        
+ 
         beforeEach(^{
             [NBKR resetInstance];
             NSString *dailyFixturesPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"daily_valid_currencies" ofType:@"xml"];

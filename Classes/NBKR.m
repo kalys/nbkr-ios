@@ -26,20 +26,29 @@
 @synthesize currencyCode = _currencyCode;
 @synthesize rateNode = _rateNode;
 
-static dispatch_once_t once_token = 0;
-
-+ (id) sharedInstance {
-    
-    __strong static id _sharedObject = nil;
-    
-    dispatch_once(&once_token, ^{
-        _sharedObject = [[self alloc] init];
-    });
-    return _sharedObject;
-}
-
-+ (void) resetInstance {
-    once_token = 0;
+- (void) weeklyCurrencyRates:(void (^)(NSArray *))completeBlock error:(void (^)(NSError *))errorBlock {
+    self.result = [NSMutableArray new];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://www.nbkr.kg/XML/weekly.xml"]];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                               NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                               if (connectionError) {
+                                   errorBlock(connectionError);
+                                   return;
+                               }
+                               
+                               if ([httpResponse statusCode] == 200) {
+                                   
+                                   NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
+                                   [xmlParser setDelegate:self];
+                                   [xmlParser parse];
+                                   completeBlock(self.result);
+                               } else {
+                                   errorBlock([NSError errorWithDomain:@"NBKR weekly rates. Invalid status code." code:-1 userInfo:nil]);
+                               }
+                           }
+     ];
 }
 
 - (void) dailyCurrencyRates:(void (^)(NSArray *))completeBlock error:(void (^)(NSError *))errorBlock {

@@ -20,6 +20,18 @@ To run the example project; clone the repo, and run `pod install` from the Proje
 ];
 ```
 
+### Weekly currency rates
+```
+[[NBKR new] weeklyCurrencyRates:^(NSArray *rates)
+	{
+		NSLog(@"%@", [rates objectAtIndex:0]);
+		NSLog(@"%@", [rates objectAtIndex:1]);
+	}
+	error:^(NSError *error) {
+		NSLog(@"%@", error);
+	}
+];
+```
 ## Requirements
 
 ## Installation

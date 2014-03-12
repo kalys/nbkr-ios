@@ -26,7 +26,7 @@
 
     [self.tableView setDataSource:self];
     
-    [[NBKR sharedInstance] dailyCurrencyRates:^(NSArray* response) {
+    [[NBKR new] dailyCurrencyRates:^(NSArray* response) {
         self.result = response;
         [self.tableView reloadData];
         }

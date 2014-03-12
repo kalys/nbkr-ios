@@ -10,11 +10,8 @@
 
 @interface NBKR : NSObject<NSXMLParserDelegate>
 
-+ (id) sharedInstance;
-+ (void) resetInstance;
-
-- (void) currencyRates:(void (^)(NSDictionary *)) response error:(void(^)(NSError *)) error;
 - (void) dailyCurrencyRates:(void (^)(NSArray *)) response error:(void(^)(NSError *)) error;
+- (void) weeklyCurrencyRates:(void (^)(NSArray *)) response error:(void(^)(NSError *)) error;
 
 @property (nonatomic, strong) NSMutableArray *result;
 
