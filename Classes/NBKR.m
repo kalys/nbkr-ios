@@ -43,19 +43,4 @@
      ];
 }
 
-#pragma mark Helper methods
-
-- (NSData *) getContentsOfUrlString:(NSString *)url {
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL: [NSURL URLWithString:url]];
-    NSURLResponse * response = nil;
-    NSError *error = nil;
-    
-
-    NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
-    if (error) {
-        return nil;
-    }
-    return data;
-}
-
 @end
