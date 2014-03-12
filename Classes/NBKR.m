@@ -27,8 +27,17 @@
 @synthesize rateNode = _rateNode;
 
 - (void) weeklyCurrencyRates:(void (^)(NSArray *))completeBlock error:(void (^)(NSError *))errorBlock {
+    [self requestCurrencyRates:@"weekly" complete:completeBlock error:errorBlock];
+}
+
+- (void) dailyCurrencyRates:(void (^)(NSArray *))completeBlock error:(void (^)(NSError *))errorBlock {
+    [self requestCurrencyRates:@"daily" complete:completeBlock error:errorBlock];
+}
+
+- (void) requestCurrencyRates:(NSString *)type complete:(void (^)(NSArray *))completeBlock error:(void (^)(NSError *))errorBlock {
     self.result = [NSMutableArray new];
-    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://www.nbkr.kg/XML/weekly.xml"]];
+    NSString *urlString = [NSString stringWithFormat:@"http://www.nbkr.kg/XML/%@.xml", type, nil];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
@@ -45,35 +54,11 @@
                                    [xmlParser parse];
                                    completeBlock(self.result);
                                } else {
-                                   errorBlock([NSError errorWithDomain:@"NBKR weekly rates. Invalid status code." code:-1 userInfo:nil]);
+                                   NSString *errorMessage = [NSString stringWithFormat:@"NBKR %@ rates. Invalid status code.", type, nil];
+                                   errorBlock([NSError errorWithDomain:errorMessage code:-1 userInfo:nil]);
                                }
                            }
      ];
-}
-
-- (void) dailyCurrencyRates:(void (^)(NSArray *))completeBlock error:(void (^)(NSError *))errorBlock {
-    self.result = [NSMutableArray new];
-    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://www.nbkr.kg/XML/daily.xml"]];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                               NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-                               if (connectionError) {
-                                   errorBlock(connectionError);
-                                   return;
-                               }
-                               
-                               if ([httpResponse statusCode] == 200) {
-                               
-                                   NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
-                                   [xmlParser setDelegate:self];
-                                   [xmlParser parse];
-                                   completeBlock(self.result);
-                               } else {
-                                   errorBlock([NSError errorWithDomain:@"NBKR daily rates. Invalid status code." code:-1 userInfo:nil]);
-                               }
-                           }
-    ];
 }
 
 #pragma mark NSXMLParserDelegate methods
