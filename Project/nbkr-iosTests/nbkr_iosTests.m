@@ -38,9 +38,9 @@ describe(@"dailyCurrencyRates:error", ^{
         });
         
         it(@"should call successful block with data dictionary", ^AsyncBlock {
-            [[[NBKR alloc] init] dailyCurrencyRates:^(NSDictionary *rates) {
+            [[[NBKR alloc] init] dailyCurrencyRates:^(NSArray *rates) {
                 expect(rates).notTo.beEmpty();
-                expect([rates allKeys]).to.beSupersetOf(@[@"USD", @"KZT", @"RUB", @"EUR"]);
+                expect([[rates objectAtIndex:0] objectForKey:@"currency"]).to.equal(@"USD");
                 done();
             }
                                               error:^(NSError *error) {
@@ -51,6 +51,7 @@ describe(@"dailyCurrencyRates:error", ^{
     });
 });
 
+/*
 describe(@"currencyRates:error", ^{
     context(@"when online", ^{
         
@@ -83,6 +84,7 @@ describe(@"currencyRates:error", ^{
             error:nil];
         });
     });
+ */
     
     /*
      
@@ -127,6 +129,7 @@ describe(@"currencyRates:error", ^{
         it(@"should call error block if there is old cache file", ^{});
     });
      */
+/*
 });
-
+*/
 SpecEnd

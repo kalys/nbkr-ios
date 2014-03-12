@@ -14,8 +14,8 @@
 + (void) resetInstance;
 
 - (void) currencyRates:(void (^)(NSDictionary *)) response error:(void(^)(NSError *)) error;
-- (void) dailyCurrencyRates:(void (^)(NSDictionary *)) response error:(void(^)(NSError *)) error;
+- (void) dailyCurrencyRates:(void (^)(NSArray *)) response error:(void(^)(NSError *)) error;
 
-@property (nonatomic, strong) NSMutableDictionary *result;
+@property (nonatomic, strong) NSMutableArray *result;
 
 @end

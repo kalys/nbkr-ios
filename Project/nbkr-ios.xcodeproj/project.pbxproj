@@ -18,7 +18,7 @@
 		EE5B3700185CB67C00B3045A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5B36FF185CB67C00B3045A /* main.m */; };
 		EE5B3704185CB67C00B3045A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5B3703185CB67C00B3045A /* AppDelegate.m */; };
 		EE5B3707185CB67C00B3045A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE5B3705185CB67C00B3045A /* Main.storyboard */; };
-		EE5B370A185CB67C00B3045A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5B3709185CB67C00B3045A /* ViewController.m */; };
+		EE5B370A185CB67C00B3045A /* DailyRatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5B3709185CB67C00B3045A /* DailyRatesViewController.m */; };
 		EE5B370C185CB67C00B3045A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE5B370B185CB67C00B3045A /* Images.xcassets */; };
 		EE5B3713185CB67C00B3045A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5B3712185CB67C00B3045A /* XCTest.framework */; };
 		EE5B3714185CB67C00B3045A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5B36F3185CB67C00B3045A /* Foundation.framework */; };
@@ -55,8 +55,8 @@
 		EE5B3702185CB67C00B3045A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EE5B3703185CB67C00B3045A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		EE5B3706185CB67C00B3045A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EE5B3708185CB67C00B3045A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		EE5B3709185CB67C00B3045A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EE5B3708185CB67C00B3045A /* DailyRatesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DailyRatesViewController.h; sourceTree = "<group>"; };
+		EE5B3709185CB67C00B3045A /* DailyRatesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DailyRatesViewController.m; sourceTree = "<group>"; };
 		EE5B370B185CB67C00B3045A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EE5B3711185CB67C00B3045A /* nbkr-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nbkr-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE5B3712185CB67C00B3045A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -131,8 +131,8 @@
 				EE5B3702185CB67C00B3045A /* AppDelegate.h */,
 				EE5B3703185CB67C00B3045A /* AppDelegate.m */,
 				EE5B3705185CB67C00B3045A /* Main.storyboard */,
-				EE5B3708185CB67C00B3045A /* ViewController.h */,
-				EE5B3709185CB67C00B3045A /* ViewController.m */,
+				EE5B3708185CB67C00B3045A /* DailyRatesViewController.h */,
+				EE5B3709185CB67C00B3045A /* DailyRatesViewController.m */,
 				EE5B370B185CB67C00B3045A /* Images.xcassets */,
 				EE5B36FA185CB67C00B3045A /* Supporting Files */,
 			);
@@ -336,7 +336,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE5B370A185CB67C00B3045A /* ViewController.m in Sources */,
+				EE5B370A185CB67C00B3045A /* DailyRatesViewController.m in Sources */,
 				EE5B3704185CB67C00B3045A /* AppDelegate.m in Sources */,
 				EE5B3700185CB67C00B3045A /* main.m in Sources */,
 			);

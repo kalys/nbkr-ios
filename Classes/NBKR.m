@@ -42,8 +42,8 @@ static dispatch_once_t once_token = 0;
     once_token = 0;
 }
 
-- (void) dailyCurrencyRates:(void (^)(NSDictionary *))completeBlock error:(void (^)(NSError *))errorBlock {
-    self.result = [NSMutableDictionary new];
+- (void) dailyCurrencyRates:(void (^)(NSArray *))completeBlock error:(void (^)(NSError *))errorBlock {
+    self.result = [NSMutableArray new];
     NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://www.nbkr.kg/XML/daily.xml"]];
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
@@ -115,7 +115,8 @@ static dispatch_once_t once_token = 0;
     if ([elementName isEqualToString:@"Value"]) {
         self.rateNode = NO;
     } else if ([elementName isEqualToString:@"Currency"]) {
-        [self.result setObject:@{@"rate": self.currencyRate, @"date": self.dateString} forKey:self.currencyCode];
+        //[self.result setObject:@{@"rate": self.currencyRate, @"date": self.dateString} forKey:self.currencyCode];
+        [self.result addObject:@{@"currency": self.currencyCode, @"rate": self.currencyRate, @"date": self.dateString}];
         
         self.currencyRate = nil;
         self.currencyCode = nil;
