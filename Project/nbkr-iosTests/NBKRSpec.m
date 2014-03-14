@@ -11,7 +11,9 @@
 #import "Specta.h"
 #import "Expecta.h"
 #import "Nocilla.h"
+#import "OCMock.h"
 #import "NBKR.h"
+#import "NBKRXMLParser.h"
 
 SpecBegin(NBKR)
 
@@ -34,10 +36,12 @@ describe(@"dailyCurrencyRates:error", ^{
             stubRequest(@"GET", @"http://www.nbkr.kg/XML/daily.xml").
                 andReturn(200).
                 withBody([NSData dataWithContentsOfFile:dailyFixturesPath]);
+            NSArray *expectedResult = @[@"ololo"];
+            id parser = [OCMockObject mockForClass:[NBKRXMLParser class]];
+            [(NBKRXMLParser *)[[parser stub] andReturn:expectedResult] parse:[OCMArg any]];
             
-            [[NBKR new] dailyCurrencyRates:^(NSArray *rates) {
-                                            expect(rates).notTo.beEmpty();
-                                            expect([[rates objectAtIndex:0] objectForKey:@"currency"]).to.equal(@"USD");
+            [[[NBKR alloc] initWithParser:parser] dailyCurrencyRates:^(NSArray *rates) {
+                                            expect(rates).to.equal(expectedResult);
                                             done();
                                         }
                                      error: nil
@@ -50,7 +54,7 @@ describe(@"dailyCurrencyRates:error", ^{
             stubRequest(@"GET", @"http://www.nbkr.kg/XML/daily.xml").
                 andReturn(404);
             
-            [[NBKR new] dailyCurrencyRates:nil
+            [[[NBKR alloc] initWithParser:nil] dailyCurrencyRates:nil
                                      error:^(NSError *error) {
                                          NSLog(@"%@", error);
                                          done();
@@ -80,10 +84,12 @@ describe(@"weeklyCurrencyRates:error", ^{
             stubRequest(@"GET", @"http://www.nbkr.kg/XML/weekly.xml").
             andReturn(200).
             withBody([NSData dataWithContentsOfFile:weeklyFixturesPath]);
+            NSArray *expectedResult = @[@"ololo"];
+            id parser = [OCMockObject mockForClass:[NBKRXMLParser class]];
+            [(NBKRXMLParser *)[[parser stub] andReturn:expectedResult] parse:[OCMArg any]];
             
-            [[NBKR new] weeklyCurrencyRates:^(NSArray *rates) {
-                expect(rates).notTo.beEmpty();
-                expect([[rates objectAtIndex:0] objectForKey:@"currency"]).to.equal(@"GBP");
+            [[[NBKR alloc] initWithParser:parser] weeklyCurrencyRates:^(NSArray *rates) {
+                expect(rates).to.equal(expectedResult);
                 done();
             }
                                      error: nil

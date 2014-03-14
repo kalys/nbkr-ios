@@ -2,12 +2,14 @@ PODS:
   - Expecta (0.2.4)
   - nbkr-ios (0.0.1)
   - Nocilla (0.8.1)
+  - OCMock (2.2.3)
   - Specta (0.2.1)
 
 DEPENDENCIES:
   - Expecta
   - nbkr-ios (from `../`)
   - Nocilla
+  - OCMock
   - Specta
 
 EXTERNAL SOURCES:
@@ -18,6 +20,7 @@ SPEC CHECKSUMS:
   Expecta: 5c147dedfea5fbcf773995f7e65020abcc936ce5
   nbkr-ios: b2596713e9aeb5f5e63c2444d193def08d70038f
   Nocilla: 0c8075046df476b1bc6482caa7f6a69db1a9b277
+  OCMock: 74e4ddbcef134170dcc844f91c691f13868075d7
   Specta: 2d06220591110c6d9757d8be8ecf8e63aa40dc2a
 
 COCOAPODS: 0.29.0

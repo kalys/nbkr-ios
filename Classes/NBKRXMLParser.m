@@ -18,21 +18,11 @@
 
 @end
 
-
-NSXMLParser *xmlParser;
-
 @implementation NBKRXMLParser
 
-- (instancetype) initWithData:(NSData *)data {
-    self = [super init];
-    if (self) {
-        xmlParser = [[NSXMLParser alloc] initWithData:data];
-        [xmlParser setDelegate:self];
-    }
-    return self;
-}
-
-- (NSArray *) parse {
+- (NSArray *) parse:(NSData *)data {
+    NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
+    [xmlParser setDelegate:self];
     self.result = [NSMutableArray new];
     [xmlParser parse];
     return self.result;

@@ -9,7 +9,19 @@
 #import "NBKR.h"
 #import "NBKRXMLParser.h"
 
+@interface NBKR ()
+    @property (nonatomic, weak) NBKRXMLParser *parser;
+@end
+
 @implementation NBKR
+
+- (instancetype) initWithParser:(NBKRXMLParser *)parser {
+    self = [super init];
+    if (self) {
+        self.parser = parser;
+    }
+    return self;
+}
 
 - (void) weeklyCurrencyRates:(void (^)(NSArray *))completeBlock error:(void (^)(NSError *))errorBlock {
     [self requestCurrencyRates:@"weekly" complete:completeBlock error:errorBlock];
@@ -33,7 +45,7 @@
                                }
                                
                                if ([httpResponse statusCode] == 200) {
-                                   completeBlock([[[NBKRXMLParser alloc] initWithData:data] parse]);
+                                   completeBlock([self.parser parse:data]);
                                    
                                } else {
                                    NSString *errorMessage = [NSString stringWithFormat:@"NBKR %@ rates. Invalid status code.", type, nil];

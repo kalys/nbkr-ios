@@ -8,4 +8,5 @@ target :'nbkr-iosTests' do
   pod 'Specta'
   pod 'Expecta'
   pod 'Nocilla'
+  pod 'OCMock'
 end

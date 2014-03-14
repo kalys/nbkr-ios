@@ -20,8 +20,8 @@ SpecBegin(NBKRXMLParser)
 describe(@"parse", ^{
     it(@"should parse data", ^{
         NSString *dailyFixturesPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"daily_valid_currencies" ofType:@"xml"];
-        NBKRXMLParser *parser = [[NBKRXMLParser alloc] initWithData:[NSData dataWithContentsOfFile:dailyFixturesPath]];
-        NSArray * rates = [parser parse];
+        NBKRXMLParser *parser = [NBKRXMLParser new];
+        NSArray * rates = [parser parse:[NSData dataWithContentsOfFile:dailyFixturesPath]];
         expect(rates).notTo.beEmpty();
         expect([[rates objectAtIndex:0] objectForKey:@"currency"]).to.equal(@"USD");
     });
