@@ -24,7 +24,8 @@
 		EE5B3714185CB67C00B3045A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5B36F3185CB67C00B3045A /* Foundation.framework */; };
 		EE5B3715185CB67C00B3045A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5B36F7185CB67C00B3045A /* UIKit.framework */; };
 		EE5B371D185CB67C00B3045A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE5B371B185CB67C00B3045A /* InfoPlist.strings */; };
-		EE5B371F185CB67C00B3045A /* nbkr_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5B371E185CB67C00B3045A /* nbkr_iosTests.m */; };
+		EE5B371F185CB67C00B3045A /* NBKRSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5B371E185CB67C00B3045A /* NBKRSpec.m */; };
+		EE84D73E18D0A30D00DE8226 /* NBKRXMLParserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = EE84D73D18D0A30D00DE8226 /* NBKRXMLParserSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +63,8 @@
 		EE5B3712185CB67C00B3045A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		EE5B371A185CB67C00B3045A /* nbkr-iosTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "nbkr-iosTests-Info.plist"; sourceTree = "<group>"; };
 		EE5B371C185CB67C00B3045A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		EE5B371E185CB67C00B3045A /* nbkr_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = nbkr_iosTests.m; sourceTree = "<group>"; };
+		EE5B371E185CB67C00B3045A /* NBKRSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBKRSpec.m; sourceTree = "<group>"; };
+		EE84D73D18D0A30D00DE8226 /* NBKRXMLParserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBKRXMLParserSpec.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,7 +155,8 @@
 		EE5B3718185CB67C00B3045A /* nbkr-iosTests */ = {
 			isa = PBXGroup;
 			children = (
-				EE5B371E185CB67C00B3045A /* nbkr_iosTests.m */,
+				EE5B371E185CB67C00B3045A /* NBKRSpec.m */,
+				EE84D73D18D0A30D00DE8226 /* NBKRXMLParserSpec.m */,
 				EE5B3719185CB67C00B3045A /* Supporting Files */,
 			);
 			path = "nbkr-iosTests";
@@ -346,7 +349,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE5B371F185CB67C00B3045A /* nbkr_iosTests.m in Sources */,
+				EE84D73E18D0A30D00DE8226 /* NBKRXMLParserSpec.m in Sources */,
+				EE5B371F185CB67C00B3045A /* NBKRSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
