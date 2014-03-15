@@ -14,18 +14,18 @@
 @property (nonatomic, retain) NSString *currencyCode;
 @property (nonatomic, assign) BOOL rateNode;
 @property (nonatomic, retain) NSString *currencyRate;
-@property (nonatomic, strong) NSMutableArray *result;
+@property (nonatomic, strong) NSMutableArray *rates;
 
 @end
 
 @implementation NBKRXMLParser
 
-- (NSArray *) parse:(NSData *)data {
+- (NSDictionary *) parse:(NSData *)data {
     NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
     [xmlParser setDelegate:self];
-    self.result = [NSMutableArray new];
+    self.rates = [NSMutableArray new];
     [xmlParser parse];
-    return self.result;
+    return @{@"date": self.dateString, @"rates": self.rates};
 }
 
 #pragma mark NSXMLParserDelegate methods
@@ -51,7 +51,7 @@
         self.rateNode = NO;
     } else if ([elementName isEqualToString:@"Currency"]) {
         //[self.result setObject:@{@"rate": self.currencyRate, @"date": self.dateString} forKey:self.currencyCode];
-        [self.result addObject:@{@"currency": self.currencyCode, @"rate": self.currencyRate, @"date": self.dateString}];
+        [self.rates addObject:@{@"currency": self.currencyCode, @"rate": self.currencyRate}];
         
         self.currencyRate = nil;
         self.currencyCode = nil;

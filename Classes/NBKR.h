@@ -11,8 +11,9 @@
 
 @interface NBKR : NSObject
 
-- (instancetype) initWithParser:(NBKRXMLParser *) parser;
-- (void) dailyCurrencyRates:(void (^)(NSArray *)) response error:(void(^)(NSError *)) error;
-- (void) weeklyCurrencyRates:(void (^)(NSArray *)) response error:(void(^)(NSError *)) error;
+@property (nonatomic, strong) NBKRXMLParser *parser;
+
+- (void) dailyCurrencyRates:(void (^)(NSDictionary *)) response error:(void(^)(NSError *)) error;
+- (void) weeklyCurrencyRates:(void (^)(NSDictionary *)) response error:(void(^)(NSError *)) error;
 
 @end

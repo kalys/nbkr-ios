@@ -26,8 +26,8 @@
 
     [self.tableView setDataSource:self];
     
-    [[NBKR new] dailyCurrencyRates:^(NSArray* response) {
-        self.result = response;
+    [[NBKR new] dailyCurrencyRates:^(NSDictionary *response) {
+        self.result = [response objectForKey:@"rates"];
         [self.tableView reloadData];
         }
                                    error:nil];

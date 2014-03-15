@@ -10,6 +10,6 @@
 
 @interface NBKRXMLParser : NSObject<NSXMLParserDelegate>
 
-- (NSArray *) parse:(NSData *)data;
+- (NSDictionary *) parse:(NSData *)data;
 
 @end

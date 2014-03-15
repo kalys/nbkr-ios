@@ -9,29 +9,25 @@
 #import "NBKR.h"
 #import "NBKRXMLParser.h"
 
-@interface NBKR ()
-    @property (nonatomic, weak) NBKRXMLParser *parser;
-@end
-
 @implementation NBKR
 
-- (instancetype) initWithParser:(NBKRXMLParser *)parser {
+- (instancetype) init {
     self = [super init];
     if (self) {
-        self.parser = parser;
+        self.parser = [NBKRXMLParser new];
     }
     return self;
 }
 
-- (void) weeklyCurrencyRates:(void (^)(NSArray *))completeBlock error:(void (^)(NSError *))errorBlock {
+- (void) weeklyCurrencyRates:(void (^)(NSDictionary *))completeBlock error:(void (^)(NSError *))errorBlock {
     [self requestCurrencyRates:@"weekly" complete:completeBlock error:errorBlock];
 }
 
-- (void) dailyCurrencyRates:(void (^)(NSArray *))completeBlock error:(void (^)(NSError *))errorBlock {
+- (void) dailyCurrencyRates:(void (^)(NSDictionary *))completeBlock error:(void (^)(NSError *))errorBlock {
     [self requestCurrencyRates:@"daily" complete:completeBlock error:errorBlock];
 }
 
-- (void) requestCurrencyRates:(NSString *)type complete:(void (^)(NSArray *))completeBlock error:(void (^)(NSError *))errorBlock {
+- (void) requestCurrencyRates:(NSString *)type complete:(void (^)(NSDictionary *))completeBlock error:(void (^)(NSError *))errorBlock {
 
     NSString *urlString = [NSString stringWithFormat:@"http://www.nbkr.kg/XML/%@.xml", type, nil];
     NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];

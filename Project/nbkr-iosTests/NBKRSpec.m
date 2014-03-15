@@ -37,14 +37,14 @@ describe(@"dailyCurrencyRates:error", ^{
             stubRequest(@"GET", @"http://www.nbkr.kg/XML/daily.xml").
                 andReturn(200).
                 withBody(expectedBody);
-            NSArray *expectedResult = @[@"ololo"];
+            NSDictionary *expectedResult = @{@"ololo": @"lol"};
             id parser = [OCMockObject mockForClass:[NBKRXMLParser class]];
             // [(NBKRXMLParser*) [parser expect] parse:expectedBody];
             [(NBKRXMLParser *)[[parser stub] andReturn:expectedResult] parse:expectedBody];
             NBKR *nbkr = [NBKR new];
             nbkr.parser = parser;
-            [nbkr dailyCurrencyRates:^(NSArray *rates) {
-                    expect(rates).to.equal(expectedResult);
+            [nbkr dailyCurrencyRates:^(NSDictionary *result) {
+                    expect(result).to.equal(expectedResult);
                     [parser verify];
                     done();
                 }
@@ -90,14 +90,14 @@ describe(@"weeklyCurrencyRates:error", ^{
                 andReturn(200).
                 withBody(expectedResponse);
             
-            NSArray *expectedResult = @[@"ololo"];
+            NSDictionary *expectedResult = @{@"ololo": @"lol"};
             id parser = [OCMockObject mockForClass:[NBKRXMLParser class]];
             [(NBKRXMLParser *)[[parser stub] andReturn:expectedResult] parse:expectedResponse];
             NBKR *nbkr = [NBKR new];
             nbkr.parser = parser;
             
-            [nbkr weeklyCurrencyRates:^(NSArray *rates) {
-                expect(rates).to.equal(expectedResult);
+            [nbkr weeklyCurrencyRates:^(NSDictionary *result) {
+                expect(result).to.equal(expectedResult);
                 [parser verify];
                 done();
             }
