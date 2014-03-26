@@ -2,6 +2,8 @@ platform :ios, '6.0'
 
 target :'nbkr-ios' do
   pod "nbkr-ios", :path => "../"
+  pod "ReactiveCocoa"
+  pod 'libextobjc'
 end
 
 target :'nbkr-iosTests' do
