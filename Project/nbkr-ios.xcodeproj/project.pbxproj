@@ -26,6 +26,7 @@
 		EE5B371D185CB67C00B3045A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE5B371B185CB67C00B3045A /* InfoPlist.strings */; };
 		EE5B371F185CB67C00B3045A /* NBKRSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5B371E185CB67C00B3045A /* NBKRSpec.m */; };
 		EE84D73E18D0A30D00DE8226 /* NBKRXMLParserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = EE84D73D18D0A30D00DE8226 /* NBKRXMLParserSpec.m */; };
+		EEB4BF9A18D5FAE800B1F549 /* CurrencyRate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB4BF9918D5FAE800B1F549 /* CurrencyRate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,8 @@
 		EE5B371C185CB67C00B3045A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EE5B371E185CB67C00B3045A /* NBKRSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBKRSpec.m; sourceTree = "<group>"; };
 		EE84D73D18D0A30D00DE8226 /* NBKRXMLParserSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBKRXMLParserSpec.m; sourceTree = "<group>"; };
+		EEB4BF9818D5FAE800B1F549 /* CurrencyRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyRate.h; sourceTree = "<group>"; };
+		EEB4BF9918D5FAE800B1F549 /* CurrencyRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyRate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,7 @@
 		EE5B36F9185CB67C00B3045A /* nbkr-ios */ = {
 			isa = PBXGroup;
 			children = (
+				EEB4BF9718D5FACF00B1F549 /* Models */,
 				EE5B3702185CB67C00B3045A /* AppDelegate.h */,
 				EE5B3703185CB67C00B3045A /* AppDelegate.m */,
 				EE5B3705185CB67C00B3045A /* Main.storyboard */,
@@ -171,6 +175,15 @@
 				EE5B371B185CB67C00B3045A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EEB4BF9718D5FACF00B1F549 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EEB4BF9818D5FAE800B1F549 /* CurrencyRate.h */,
+				EEB4BF9918D5FAE800B1F549 /* CurrencyRate.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,6 +352,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEB4BF9A18D5FAE800B1F549 /* CurrencyRate.m in Sources */,
 				EE5B370A185CB67C00B3045A /* DailyRatesViewController.m in Sources */,
 				EE5B3704185CB67C00B3045A /* AppDelegate.m in Sources */,
 				EE5B3700185CB67C00B3045A /* main.m in Sources */,
